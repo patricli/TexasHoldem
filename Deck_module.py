@@ -33,9 +33,9 @@ class Deck:
                 #print(a.suit)
                 #print(a.num)
                 self.data.append(a)
-        self.len = len(self.data)  #cards left in deck ??should we take outside init?
+        #self.len = len(self.data)  #cards left in deck ??should we take outside init?
 
-    #delete remainder if self.len works
+    #delete remainder if deck_len works
     def remainder(self):
         count = 0
         for i in self.data:
@@ -44,13 +44,16 @@ class Deck:
 
     #generate a random int and pop that index position from the deck
     def draw_card(self):
-        index = random.randint(0,self.len-1)
-        print("Random index = " + str(index))
-        return self.data.pop(index)
+        index = random.randint(0,self.deck_len()-1)
+        #print("Random index = " , index)  #temp check
 
+        if index>0:
+            return self.data.pop(index)
+        else:
+            return "Empty deck"
+
+    def deck_len(self):
+        return len(self.data)
 
 #validation tests
-a_Deck = Deck()
-print(a_Deck.remainder())
-print(a_Deck.len)
-print(a_Deck.draw_card().show_card())
+
