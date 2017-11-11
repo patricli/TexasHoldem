@@ -44,13 +44,12 @@ class Deck:
 
     #generate a random int and pop that index position from the deck
     def draw_card(self):
-        index = random.randint(0,self.deck_len()-1)
-        #print("Random index = " , index)  #temp check
-
-        if index>0:
+        if self.deck_len()>0:
+            index = random.randint(0, self.deck_len() - 1)
+            #print("Random index = ", index)  # temp check
             return self.data.pop(index)
         else:
-            return "Empty deck"
+            return ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Empty deck"
 
     def deck_len(self):
         return len(self.data)

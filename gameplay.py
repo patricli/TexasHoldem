@@ -3,7 +3,7 @@ from Player_module import *
 
 #ENV variables
 num_players = 2
-num_rounds = 40
+num_rounds = 60
 
 
 def play_round(player_list):
@@ -39,16 +39,17 @@ def play_round(player_list):
 
     #round summary
     for foo in player_list:
+        #print(foo)
         print(foo.show_hand())
         print("%s has a bankroll of %d" % (foo.name, foo.bankroll))
 
     print("\n")
     print("Community cards:")
 
-    print(len(community))
+    #print(len(community))
     for bar in community:
-        #print(bar.show_card())
-        print(bar)
+        print(bar.show_card())
+        #print(bar)
 
     #clear the table
     for foo in player_list:
