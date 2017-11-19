@@ -2,14 +2,14 @@ import random
 
 
 class Card():   #an object for cards with value suit and num
-    def __init__(self, suit, num):
+    def __init__(self, num, suit):
 
-        self.suit = suit  #int
-        self.num = num    #int
+        self.num = num    #int from 1-13
+        self.suit = suit  # int from 0-3
 
     def show_card(self):    #returns card in human readable format
         suit_list = ["Diamond","Club","Heart","Spade"]
-        if (self.num == 1):
+        if (self.num == 14):
             return "Ace of " + suit_list[self.suit]
         elif (self.num == 11):
             return "Jack of " + suit_list[self.suit]
@@ -28,19 +28,9 @@ class Deck:
         #Suits = ["Spade", "Heart", "Club", "Diamond"]
 
         for suit in range(0,4):
-            for i in range(1,14):
-                a = Card(suit, i)
-                #print(a.suit)
-                #print(a.num)
+            for i in range(2,15):  #Ace=14
+                a = Card(i, suit)
                 self.data.append(a)
-        #self.len = len(self.data)  #cards left in deck ??should we take outside init?
-
-    #delete remainder if deck_len works
-    def remainder(self):
-        count = 0
-        for i in self.data:
-            count = count+1
-        return count
 
     #generate a random int and pop that index position from the deck
     def draw_card(self):
