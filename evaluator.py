@@ -5,8 +5,9 @@
 
 import itertools
 #from card import Card
+from Deck_module import Card
 from lookup import LookupTable
-
+from rank_card import *
 
 
 class Evaluator(object):

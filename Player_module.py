@@ -7,6 +7,7 @@ class player():
         self.name = name
         self.bankroll = 5000
         self.hand = []
+        self.active = 0
 
 
     def show_hand(self):

@@ -1,4 +1,4 @@
-from evaluator import *
+#from Deck_module import Card
 
 """
 Static class that handles cards. We represent cards as 32-bit integers, so
@@ -38,7 +38,7 @@ SUIT_RANKS = {
     0 : 8,  # clubs
 }
 
-
+'''
 def rank_card(card):
     """
     Converts Card string to binary integer representation of card, inspired by:
@@ -56,16 +56,15 @@ def rank_card(card):
     rank = rank_int << 8
 
     return bitrank | suit | rank | rank_prime
-
+'''
 
 
 def prime_product_from_hand(card):
     """
     Expects a list of cards in integer form.
     """
-    card_ints = rank_card(card)
     product = 1
-    for c in card_ints:
+    for c in card:
         product *= (c & 0xFF)
 
     return product
@@ -101,9 +100,4 @@ def prime_product_from_rankbits(rankbits):
 
     return product
 
-def eval_rank_hand(board,hand):
-    hand_rank = [ rank_card(i) for i in hand]
-    board_rank = [ rank_card(i) for i in board]
-    evaluator = Evaluator()
-    return evaluator.evaluate(board_rank, hand_rank)
 

@@ -1,12 +1,6 @@
 import random
 
-
 class Card():   #an object for cards with value suit and num
-    def __init__(self, num, suit):
-
-        self.num = num    #int from 1-13
-        self.suit = suit  # int from 0-3
-
     def show_card(self):    #returns card in human readable format
         suit_list = ["Diamond","Club","Heart","Spade"]
         if (self.num == 14):
@@ -19,6 +13,39 @@ class Card():   #an object for cards with value suit and num
             return "King of " + suit_list[self.suit]
         else:
             return str(self.num) + " of " + suit_list[self.suit]
+
+
+
+    def _rank_card(card):
+        """
+        Converts Card string to binary integer representation of card, inspired by:
+
+        http://www.suffecool.net/poker/evaluator.html
+        """
+
+        PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
+        SUIT_RANKS = {
+            3: 1,  # spades
+            2: 2,  # hearts
+            1: 4,  # diamonds
+            0: 8,  # clubs
+        }
+
+        rank_int = card.num - 2
+        suit_int = SUIT_RANKS[card.suit]
+        rank_prime = PRIMES[rank_int]
+
+        bitrank = 1 << rank_int << 16
+        suit = suit_int << 12
+        rank = rank_int << 8
+
+        return bitrank | suit | rank | rank_prime
+
+    def __init__(self, num, suit):
+
+        self.num = num    #int from 1-13
+        self.suit = suit  # int from 0-3
+        self.rank = self._rank_card()  # dec int rank
 
 class Deck:
     #initialize deck as a list of 52 cards with suit from 0-3, and num from 1-13
