@@ -44,11 +44,11 @@ def play_round(player_list):
         hand_rank = [i.rank for i in hand]
         board_rank = [i.rank for i in board]
     evaluator = Evaluator()
-    board_rank = [i.rank for i in community]
+    community_rank = [i.rank for i in community]
     player_hands = []
     for i in player_list:
             hand_rank = [ card.rank for card in i.hand]
-            player_hands.append(evaluator.evaluate(board_rank, hand_rank))
+            player_hands.append(evaluator.evaluate(community_rank, hand_rank))
     print("After the flop:")
     print(player_hands)
     print("\n")
@@ -74,11 +74,11 @@ def play_round(player_list):
         hand_rank = [i.rank for i in hand]
         board_rank = [i.rank for i in board]
     evaluator = Evaluator()
-    board_rank = [i.rank for i in community]
+    community_rank = [i.rank for i in community]
     player_hands = []
     for i in player_list:
             hand_rank = [ card.rank for card in i.hand]
-            player_hands.append(evaluator.evaluate(board_rank, hand_rank))
+            player_hands.append(evaluator.evaluate(community_rank, hand_rank))
     print("After the turn:")
     print(player_hands)
     print("\n")
@@ -95,11 +95,11 @@ def play_round(player_list):
         hand_rank = [i.rank for i in hand]
         board_rank = [i.rank for i in board]
     evaluator = Evaluator()
-    board_rank = [i.rank for i in community]
+    community_rank = [i.rank for i in community]
     player_hands = []
     for i in player_list:
             hand_rank = [ card.rank for card in i.hand]
-            player_hands.append(evaluator.evaluate(board_rank, hand_rank))
+            player_hands.append(evaluator.evaluate(community_rank, hand_rank))
     print("After the river:")
     print(player_hands)
     print("\n")
@@ -111,6 +111,14 @@ def play_round(player_list):
         #print(foo)
         print(foo.show_hand())
         print("%s has a bankroll of %d" % (foo.name, foo.bankroll))
+
+    win_hand = max(player_hands)
+    win_index = player_hands.index(win_hand)
+    print(player_list[win_index].name + "wins with hand of")
+    win_rank = [i.rank for i in player_list[win_index].hand]
+    win_cards = [i.show_card() for i in player_list[win_index].hand] + [i.show_card() for i in community]
+    print(win_cards)
+    evaluator.hand_summary(community_rank, [win_rank])
 
     print("\n")
     print("Community cards:")
@@ -137,19 +145,11 @@ for i in range(1, num_players+1):
 for foo in player_list:
     print("%s has a bankroll of %d" % (foo.name, foo.bankroll))
 
-'''
-play_round(player_list)
-play_round(player_list)
-play_round(player_list)
-play_round(player_list)
-play_round(player_list)
-
-'''
 
 j = 1
 deal_order = player_list
 
-while (j < num_rounds+1):
+while (j <= num_rounds):
 
     print("Round", j)
     play_round(deal_order)
@@ -161,4 +161,3 @@ while (j < num_rounds+1):
     #print("Player deal order", deal_order)
 
     j += 1
-    print("Round", j)
